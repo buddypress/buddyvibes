@@ -1,3 +1,3 @@
 # BuddyVibes
 
-A great looking BuddyPress theme
+A great looking BuddyPress Block Theme
