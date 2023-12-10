@@ -39,6 +39,10 @@ if ( ! function_exists( 'buddyvibes_includes' ) ) {
 	 * @since 1.0.0
 	 */
 	function buddyvibes_includes() {
+		if ( ! function_exists( 'bp_theme_compat_is_block_theme' ) ) {
+			return;
+		}
+
 		require get_theme_file_path( '/inc/buddypress.php' );
 	}
 }
