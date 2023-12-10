@@ -1,0 +1,37 @@
+{
+	"name": "buddyvibes",
+	"version": "1.0.0",
+	"description": "BuddyVibes is a great looking BuddyPress theme, a candidate to the BP Default succession.",
+	"engines": {
+		"node": ">=16.19.1",
+		"npm": ">=8.19.3 <9"
+	},
+	"scripts": {
+		"build:block:core": "wp-scripts build --webpack-src-dir=src/bp-core --config src/bp-core/webpack.config.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/buddypress/buddyvibes.git"
+	},
+	"keywords": [
+		"buddypress",
+		"block-theme",
+		"full-site-editing",
+		"block-patterns"
+	],
+	"author": "The BuddyPress Community",
+	"license": "GPL-2.0+",
+	"bugs": {
+		"url": "https://github.com/buddypress/buddyvibes/issues"
+	},
+	"homepage": "https://github.com/buddypress/buddyvibes#readme",
+	"devDependencies": {
+		"@wordpress/babel-preset-default": "^7.31.0",
+		"@wordpress/browserslist-config": "^5.30.0",
+		"@wordpress/scripts": "^26.18.0",
+		"browserslist": "^4.22.2"
+	},
+	"browserslist": [
+		"extends @wordpress/browserslist-config"
+	]
+}

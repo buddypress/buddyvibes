@@ -31,3 +31,19 @@ if ( ! function_exists( 'buddyvibes_setup' ) ) {
 	}
 }
 add_action( 'after_setup_theme', 'buddyvibes_setup' );
+
+if ( ! function_exists( 'buddyvibes_includes' ) ) {
+	/**
+	 * Load BuddyPress specific functions.
+	 *
+	 * @since 1.0.0
+	 */
+	function buddyvibes_includes() {
+		if ( ! function_exists( 'bp_theme_compat_is_block_theme' ) ) {
+			return;
+		}
+
+		require get_theme_file_path( '/inc/buddypress.php' );
+	}
+}
+add_action( 'bp_after_setup_theme', 'buddyvibes_includes' );
