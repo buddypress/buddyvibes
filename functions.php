@@ -43,7 +43,8 @@ if ( ! function_exists( 'buddyvibes_includes' ) ) {
 			return;
 		}
 
-		require get_theme_file_path( '/inc/buddypress.php' );
+		require get_theme_file_path( '/inc/buddypress-blocks.php' );
+		require get_theme_file_path( '/inc/buddypress-compat.php' );
 	}
 }
 add_action( 'bp_after_setup_theme', 'buddyvibes_includes' );
