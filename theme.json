@@ -3,7 +3,8 @@
 	"version": 2,
 	"settings": {
 		"border": {
-			"color": true
+			"color": true,
+			"radius": true
 		},
 		"color": {
 			"palette": [
@@ -31,6 +32,11 @@
 					"slug": "tertiary",
 					"color": "#9e1611",
 					"name": "Tertiary"
+				},
+				{
+					"slug": "quaternary",
+					"color": "#1d2327",
+					"name": "Quaternary"
 				}
 			]
 		},
