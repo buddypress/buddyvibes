@@ -9,10 +9,10 @@
 
 <!-- wp:group {"align":"full"} -->
 <div class="wp-block-group alignfull">
-	<!-- wp:cover {"url":"<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/balloons.jpg","dimRatio":0,"overlayColor":"foreground","isUserOverlayColor":true,"focalPoint":{"x":0.55,"y":0.24},"align":"full","style":{"spacing":{"padding":{"bottom":"0"}}},"layout":{"type":"constrained"}} -->
+	<!-- wp:cover {"url":"<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/balloons.webp","dimRatio":0,"overlayColor":"foreground","isUserOverlayColor":true,"focalPoint":{"x":0.55,"y":0.24},"align":"full","style":{"spacing":{"padding":{"bottom":"0"}}},"layout":{"type":"constrained"}} -->
 	<div class="wp-block-cover alignfull" style="padding-bottom:0">
 		<span aria-hidden="true" class="wp-block-cover__background has-foreground-background-color has-background-dim-0 has-background-dim"></span>
-		<img class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/balloons.jpg" style="object-position:55% 24%" data-object-fit="cover" data-object-position="55% 24%"/>
+		<img class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/balloons.webp" style="object-position:55% 24%" data-object-fit="cover" data-object-position="55% 24%"/>
 		<div class="wp-block-cover__inner-container">
 			<!-- wp:spacer -->
 			<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
