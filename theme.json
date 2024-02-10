@@ -135,6 +135,7 @@
 		}
 	},
 	"styles": {
+		"css": "body.blog {background: #f0f0f1;}",
 		"color": {
 			"background": "var(--wp--preset--color--background)",
 			"text": "var(--wp--preset--color--foreground)"
