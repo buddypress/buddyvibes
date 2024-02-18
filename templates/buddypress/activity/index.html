@@ -1,7 +1,11 @@
 <!-- wp:template-part {"slug":"header","tagName":"header","className":"site-header"} /-->
-<!-- wp:group {"tagName":"main","layout":{"inherit":true}} -->
-<main class="wp-block-group">
-	<!-- wp:post-title /-->
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"0px"}}},"backgroundColor":"background","layout":{"inherit":true,"type":"constrained"}} -->
+<main class="wp-block-group has-background-background-color has-background" style="padding-top:0px">
+	<!-- wp:group {"align":"full","style":{"elements":{"link":{"color":{"text":"var:preset|color|background"}}},"spacing":{"blockGap":"0","margin":{"top":"0px","bottom":"0px"}}},"backgroundColor":"quaternary","textColor":"background","className":"content-header","layout":{"type":"constrained","justifyContent":"center"}} -->
+	<div class="wp-block-group alignfull content-header has-background-color has-quaternary-background-color has-text-color has-background has-link-color" style="margin-top:0px;margin-bottom:0px">
+		<!-- wp:post-title {"level":1,"textColor":"background"} /-->
+	</div>
+	<!-- /wp:group -->
 	<!-- wp:bp/item-header /-->
 	<!-- wp:spacer {"height":"20px"} -->
 	<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>

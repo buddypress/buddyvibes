@@ -40,6 +40,16 @@
 				}
 			]
 		},
+		"shadow": {
+			"defaultPresets": true,
+			"presets": [
+				{
+					"name": "Tight",
+					"slug": "tight",
+					"shadow": "1px 1px 1px rgba(0, 0, 0, 0.2)"
+				}
+			]
+		},
 		"typography": {
 			"fontFamilies": [
 				{
@@ -135,9 +145,9 @@
 		}
 	},
 	"styles": {
-		"css": "body.blog {background: #f0f0f1;}",
+		"css": "body.block-editor-iframe__body .is-root-container.is-navigation-block, body.block-editor-page .editor-styles-wrapper {background: var(--wp--preset--color--background);} footer.site-footer {margin-top:0;}",
 		"color": {
-			"background": "var(--wp--preset--color--background)",
+			"background": "var(--wp--preset--color--quaternary)",
 			"text": "var(--wp--preset--color--foreground)"
 		},
 		"typography": {
