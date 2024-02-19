@@ -221,6 +221,9 @@
 			}
 		},
 		"blocks": {
+			"core/navigation": {
+				"css": "&.buddyvibes-content-header__navigation li.wp-block-navigation-item a {padding: 0.375em 0.625em;} &.buddyvibes-content-header__navigation li.wp-block-navigation-item.current-menu-item a {color: var(--wp--preset--color--foreground);background: var(--wp--preset--color--background);} &.buddyvibes-content-header__navigation ul {gap: unset;}"
+			},
 			"core/navigation-link": {
 				"typography": {
 					"lineHeight": "1.5"
@@ -230,10 +233,10 @@
 				"typography": {
 					"lineHeight": "3"
 				},
-				"css": "&.wp-block-navigation__submenu-container { padding: 0; }"
+				"css": "&.wp-block-navigation__submenu-container {padding: 0;}"
 			},
 			"core/search": {
-				"css": "&.search-top .wp-block-search__button { padding: 0.375em 0.625em; }"
+				"css": "&.search-top .wp-block-search__button {padding: 0.375em 0.625em;}"
 			}
 		}
 	},
