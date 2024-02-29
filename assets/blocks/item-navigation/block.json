@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "bp/item-navigation",
+  "title": "BuddyPress Single Item navigation",
+  "category": "theme",
+  "icon": "superhero-alt",
+  "description": "Displays the displayed single item navigation.",
+  "textdomain": "buddypress",
+  "supports": {
+    "align": [
+      "left",
+      "right",
+      "center",
+      "wide",
+      "full"
+    ],
+    "html": false,
+    "spacing": {
+      "margin": true,
+      "padding": true
+    }
+  },
+  "editorScript": "file:index.js"
+}

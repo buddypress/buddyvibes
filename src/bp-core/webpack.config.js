@@ -13,6 +13,7 @@ module.exports = {
 			"item-body/index": './src/bp-core/item-body/item-body.js',
 			"item-header/index": './src/bp-core/item-header/item-header.js',
 			"item-avatar/index": './src/bp-core/item-avatar/item-avatar.js',
+			"item-navigation/index": './src/bp-core/item-navigation/item-navigation.js',
 			"loop/index": './src/bp-core/loop/loop.js',
 		},
 		output: {
