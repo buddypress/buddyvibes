@@ -1,0 +1,40 @@
+<!-- wp:template-part {"slug":"header","tagName":"header","className":"site-header"} /-->
+<!-- wp:group {"tagName":"main","style":{"spacing":{"padding":{"top":"0px"}}},"backgroundColor":"background","layout":{"inherit":true,"type":"constrained"}} -->
+<main class="wp-block-group has-background-background-color has-background" style="padding-top:0px">
+	<!-- wp:group {"align":"full","style":{"elements":{"link":{"color":{"text":"var:preset|color|background"}}},"spacing":{"blockGap":"0","margin":{"top":"0px","bottom":"0px"},"padding":{"bottom":"0px"}}},"backgroundColor":"quaternary","textColor":"background","className":"content-header","layout":{"type":"constrained","justifyContent":"center"}} -->
+	<div class="wp-block-group alignfull content-header has-background-color has-quaternary-background-color has-text-color has-background has-link-color" style="margin-top:0px;margin-bottom:0px;padding-bottom:0px">
+		<!-- wp:bp/item-header -->
+			<!-- wp:group {"layout":{"type":"flex","flexWrap":"nowrap"}} -->
+			<div class="wp-block-group">
+				<!-- wp:group {"layout":{"inherit":true}} -->
+				<div class="wp-block-group">
+					<!-- wp:bp/item-avatar {"isLink":true} /-->
+				</div>
+				<!-- /wp:group -->
+				<!-- wp:group {"layout":{"inherit":true}} -->
+				<div class="wp-block-group">
+					<!-- wp:heading {"level":1,"className":"bp-block-item-name member-name","textColor":"background"} -->
+					<h1 class="wp-block-heading has-background-color has-text-color bp-block-item-name member-name">Member name</h1>
+					<!-- /wp:heading -->
+				</div>
+				<!-- /wp:group -->
+			</div>
+		<!-- /wp:group -->
+		<!-- /wp:bp/item-header -->
+		<!-- wp:group {"style":{"spacing":{"padding":{"top":"var:preset|spacing|30"},"margin":{"top":"var:preset|spacing|50"}}},"layout":{"type":"flex","flexWrap":"nowrap"}} -->
+		<div class="wp-block-group" style="margin-top:var(--wp--preset--spacing--50);padding-top:var(--wp--preset--spacing--30);">
+			<!-- wp:bp/item-navigation /-->
+		</div>
+	<!-- /wp:group -->
+	</div>
+	<!-- /wp:group -->
+	<!-- wp:spacer {"height":"20px"} -->
+	<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>
+	<!-- /wp:spacer -->
+	<!-- wp:bp/item-body /-->
+	<!-- wp:spacer {"height":"20px"} -->
+	<div style="height:20px" aria-hidden="true" class="wp-block-spacer"></div>
+	<!-- /wp:spacer -->
+</main>
+<!-- /wp:group -->
+<!-- wp:template-part {"slug":"footer","tagName":"footer","className":"site-footer"} /-->

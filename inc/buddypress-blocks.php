@@ -45,6 +45,10 @@ function buddyvibes_get_theme_blocks() {
 			'metadata'        => $blocks_dir . '/loop',
 			'render_callback' => 'bp_block_render_loop',
 		),
+		'bp/item-navigation' => array(
+			'metadata'        => $blocks_dir . '/item-navigation',
+			'render_callback' => 'bp_block_render_item_navigation',
+		),
 	);
 }
 
@@ -132,17 +136,50 @@ add_action( 'bp_blocks_init', 'buddyvibes_register_theme_blocks' );
  *
  * @since 1.0.0
  *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
  * @return string HTML output.
  */
-function bp_block_render_item_header() {
+function bp_block_render_item_header( $attributes, $content, $block ) {
 	$classnames         = 'buddypress bp-item-header';
 	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => $classnames ) );
-	$bp_content         = __( 'This is where the BuddyPress item header will be generated', 'buddyvibes' );
+	$bp_content         = '';
+
+	$item_id = 0;
+	$item_type = '';
+
+	if ( bp_is_user() ) {
+		$item_id   = bp_displayed_user_id();
+		$item_type = 'members';
+	}
+
+	if ( $item_id && $item_type ) {
+		// Get an instance of the current Post Template block.
+		$block_instance              = $block->parsed_block;
+		$block_instance['blockName'] = 'bp/null';
+
+		$filter_block_context = static function( $context ) use ( $item_id, $item_type ) {
+			$context['itemType'] = $item_type;
+			$context['itemId']   = $item_id;
+			return $context;
+		};
+
+		add_filter( 'render_block_context', $filter_block_context, 1 );
+		$block_content = ( new WP_Block( $block_instance ) )->render( array( 'dynamic' => false ) );
+		remove_filter( 'render_block_context', $filter_block_context, 1 );
+
+		$bp_content .= $block_content;
+	}
+
+	if ( ! $bp_content ) {
+		$bp_content = esc_html__( 'This is where the BuddyPress item header will be generated', 'buddyvibes' );
+	}
 
 	return sprintf(
 		'<div %1$s>%2$s</div>',
 		$wrapper_attributes,
-		esc_html( $bp_content )
+		$bp_content
 	);
 }
 
@@ -313,6 +350,49 @@ function bp_block_render_loop( $attributes, $content, $block ) {
 }
 
 /**
+ * Callback function to render the navigation of the displayed single item.
+ *
+ * This function should be moved in `buddypress/src/bp-core/bp-core-blocks.php`.
+ *
+ * @since 1.0.0
+ *
+ * @return string HTML output.
+ */
+function bp_block_render_item_navigation() {
+	$classnames         = 'buddypress bp-item-navigation';
+	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => $classnames ) );
+	$bp_content         = '';
+
+	if ( bp_is_user() ) {
+		$menu_items = buddypress()->members->nav->get_primary();
+		$bp_content = '<!-- wp:navigation {"overlayMenu":"never","className":"buddyvibes-content-header__navigation","layout":{"type":"flex","setCascadingProperties":true,"justifyContent":"left"}} -->';
+
+		foreach ( $menu_items as $menu_item ) {
+			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			$bp_content .= sprintf(
+				'<!-- wp:navigation-link {"label":"%1$s","url":"%2$s","className":"%3$s"} /-->',
+				esc_html( _bp_strip_spans_from_title( $menu_item['name'] ) ),
+				esc_url( $menu_item['link'] ),
+				bp_is_current_component( $menu_item['component_id'] ) ? 'current-menu-item' : ''
+			);
+		}
+
+		$bp_content .= '<!-- /wp:navigation -->';
+	}
+
+
+	if ( $bp_content ) {
+		$bp_content = do_blocks( $bp_content );
+	}
+
+	return sprintf(
+		'<div %1$s>%2$s</div>',
+		$wrapper_attributes,
+		$bp_content
+	);
+}
+
+/**
  * Returns the titles and descriptions for supported block templates.
  *
  * This function should be moved in `buddypress/src/bp-core/bp-core-template.php`.
@@ -331,7 +411,7 @@ function bp_get_default_block_templates() {
 			'title'       => 'BuddyPress Activity Directory page',
 			'description' => __( 'Used to display the list of public BuddyPress sitewide activities shared by the community.', 'buddypress' ),
 		),
-		'buddypress/members/single-activity-permalink' => array(
+		'buddypress/members/single/activity/permalink' => array(
 			'title'       => 'BuddyPress Activity single item page',
 			'description' => __( 'Used to display a single BuddyPress activity shared by a specific member.', 'buddypress' ),
 		),
@@ -351,7 +431,7 @@ function bp_get_default_block_templates() {
 			'title'       => 'BuddyPress Groups Directory page',
 			'description' => __( 'Used to display the list of public groups of the community site.', 'buddypress' ),
 		),
-		'buddypress/groups/single-home'                => array(
+		'buddypress/groups/single/home'                => array(
 			'title'       => 'BuddyPress Groups single item Homepage',
 			'description' => __( 'Used to display a group’s homepage.', 'buddypress' ),
 		),
@@ -367,11 +447,11 @@ function bp_get_default_block_templates() {
 			'title'       => 'BuddyPress registration page',
 			'description' => __( 'Used to display the form to let new members register to the site.', 'buddypress' ),
 		),
-		'buddypress/members/single-home'               => array(
+		'buddypress/members/single/home'               => array(
 			'title'       => 'BuddyPress Members single item Homepage',
 			'description' => __( 'Used to display a member’s personnal homepage.', 'buddypress' ),
 		),
-		'buddypress/members/single-plugins'            => array(
+		'buddypress/members/single/plugins'            => array(
 			'title'       => 'BuddyPress Members single item plugin page',
 			'description' => __( 'Used by BuddyPress plugins to output some content specific to a member.', 'buddypress' ),
 		),
