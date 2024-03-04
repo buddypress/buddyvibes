@@ -364,22 +364,28 @@ function bp_block_render_item_navigation() {
 	$bp_content         = '';
 
 	if ( bp_is_user() ) {
-		$menu_items = buddypress()->members->nav->get_primary();
+		$nav_args = array();
+
+		if ( ! bp_is_my_profile() ) {
+			$nav_args = array(
+				'show_for_displayed_user' => true,
+			);
+		}
+
+		$item_navs  = buddypress()->members->nav->get_primary( $nav_args );
 		$bp_content = '<!-- wp:navigation {"overlayMenu":"never","className":"buddyvibes-content-header__navigation","layout":{"type":"flex","setCascadingProperties":true,"justifyContent":"left"}} -->';
 
-		foreach ( $menu_items as $menu_item ) {
-			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		foreach ( $item_navs as $item_nav ) {
 			$bp_content .= sprintf(
 				'<!-- wp:navigation-link {"label":"%1$s","url":"%2$s","className":"%3$s"} /-->',
-				esc_html( _bp_strip_spans_from_title( $menu_item['name'] ) ),
-				esc_url( $menu_item['link'] ),
-				bp_is_current_component( $menu_item['component_id'] ) ? 'current-menu-item' : ''
+				esc_html( _bp_strip_spans_from_title( $item_nav['name'] ) ),
+				esc_url( $item_nav['link'] ),
+				bp_is_current_component( $item_nav['component_id'] ) ? 'current-menu-item' : ''
 			);
 		}
 
 		$bp_content .= '<!-- /wp:navigation -->';
 	}
-
 
 	if ( $bp_content ) {
 		$bp_content = do_blocks( $bp_content );
