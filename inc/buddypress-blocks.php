@@ -356,31 +356,63 @@ function bp_block_render_loop( $attributes, $content, $block ) {
  *
  * @since 1.0.0
  *
+ * @param array $attributes Block attributes.
  * @return string HTML output.
  */
-function bp_block_render_item_navigation() {
-	$classnames         = 'buddypress bp-item-navigation';
+function bp_block_render_item_navigation( $attributes ) {
+	$args = bp_parse_args(
+		$attributes,
+		array(
+			'type' => 'primary',
+		)
+	);
+
+	$type = $args['type'];
+	if ( ! in_array( $type, array( 'primary', 'secondary' ), true ) ) {
+		return null;
+	}
+
+	$classnames         = sprintf( 'buddypress bp-item-%s-navigation', sanitize_html_class( $type ) );
 	$wrapper_attributes = get_block_wrapper_attributes( array( 'class' => $classnames ) );
 	$bp_content         = '';
 
 	if ( bp_is_user() ) {
 		$nav_args = array();
+		$show     = 'show_for_displayed_user';
 
-		if ( ! bp_is_my_profile() ) {
-			$nav_args = array(
-				'show_for_displayed_user' => true,
-			);
+		if ( 'secondary' === $type ) {
+			$show                    = 'user_has_access';
+			$nav_args['parent_slug'] = bp_current_component();
 		}
 
-		$item_navs  = buddypress()->members->nav->get_primary( $nav_args );
-		$bp_content = '<!-- wp:navigation {"overlayMenu":"never","className":"buddyvibes-content-header__navigation","layout":{"type":"flex","setCascadingProperties":true,"justifyContent":"left"}} -->';
+		if ( ! bp_is_my_profile() ) {
+			$nav_args[ $show ] = true;
+		}
+
+		if ( 'primary' === $type ) {
+			$container_classname = 'buddyvibes-content-header__navigation';
+			$item_navs           = buddypress()->members->nav->get_primary( $nav_args );
+		} else {
+			$container_classname = 'buddyvibes-content-body__navigation';
+			$item_navs           = buddypress()->members->nav->get_secondary( $nav_args );
+		}
+
+		// Init the navigation block.
+		$bp_content = sprintf( '<!-- wp:navigation {"overlayMenu":"never","className":"%s","layout":{"type":"flex","setCascadingProperties":true,"justifyContent":"left"}} -->', $container_classname );
 
 		foreach ( $item_navs as $item_nav ) {
+			$current = '';
+
+			// Set current item nav.
+			if ( ( 'primary' === $type && bp_is_current_component( $item_nav['slug'] ) ) || ( 'secondary' === $type && bp_is_current_action( $item_nav['slug'] ) ) ) {
+				$current = 'current-menu-item';
+			}
+
 			$bp_content .= sprintf(
 				'<!-- wp:navigation-link {"label":"%1$s","url":"%2$s","className":"%3$s"} /-->',
 				esc_html( _bp_strip_spans_from_title( $item_nav['name'] ) ),
 				esc_url( $item_nav['link'] ),
-				bp_is_current_component( $item_nav['component_id'] ) ? 'current-menu-item' : ''
+				$current
 			);
 		}
 

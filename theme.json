@@ -222,7 +222,7 @@
 		},
 		"blocks": {
 			"core/navigation": {
-				"css": "&.buddyvibes-content-header__navigation li.wp-block-navigation-item a {padding: 0.375em 0.625em;} &.buddyvibes-content-header__navigation li.wp-block-navigation-item.current-menu-item a {color: var(--wp--preset--color--foreground);background: var(--wp--preset--color--background);} &.buddyvibes-content-header__navigation ul {gap: unset;}"
+				"css": "&.buddyvibes-content-header__navigation li.wp-block-navigation-item a {padding: 0.375em 0.625em;} &.buddyvibes-content-body__navigation li.wp-block-navigation-item a {padding: 0.375em 0.625em;} &.buddyvibes-content-header__navigation li.wp-block-navigation-item.current-menu-item a {color: var(--wp--preset--color--foreground);background: var(--wp--preset--color--background);} &.buddyvibes-content-body__navigation li.wp-block-navigation-item.current-menu-item a {border-bottom: solid 1px var(--wp--preset--color--foreground);} &.buddyvibes-content-header__navigation ul {gap: unset;}"
 			},
 			"core/navigation-link": {
 				"typography": {

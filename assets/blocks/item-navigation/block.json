@@ -7,6 +7,12 @@
   "icon": "superhero-alt",
   "description": "Displays the displayed single item navigation.",
   "textdomain": "buddypress",
+  "attributes": {
+    "type": {
+      "type": "string",
+      "default": "primary"
+    }
+  },
   "supports": {
     "align": [
       "left",
