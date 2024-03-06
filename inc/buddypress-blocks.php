@@ -251,7 +251,7 @@ function bp_block_render_item_avatar( $attributes, $content, $block ) {
 	}
 
 	if ( 'members' === $block->context['itemType'] ) {
-		// Use the BuddyPress loop global if available.
+		// Use the BuddyPress loop global if it's available.
 		if ( isset( $GLOBALS['members_template']->member ) ) {
 			$avatar = bp_get_member_avatar( $avatar_args );
 
