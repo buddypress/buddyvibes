@@ -449,7 +449,7 @@ function bp_get_default_block_templates() {
 			'title'       => 'BuddyPress Activity Directory page',
 			'description' => __( 'Used to display the list of public BuddyPress sitewide activities shared by the community.', 'buddypress' ),
 		),
-		'buddypress/members/single/activity/permalink' => array(
+		'buddypress/members/single/activity' => array(
 			'title'       => 'BuddyPress Activity single item page',
 			'description' => __( 'Used to display a single BuddyPress activity shared by a specific member.', 'buddypress' ),
 		),
@@ -469,9 +469,13 @@ function bp_get_default_block_templates() {
 			'title'       => 'BuddyPress Groups Directory page',
 			'description' => __( 'Used to display the list of public groups of the community site.', 'buddypress' ),
 		),
-		'buddypress/groups/single/home'                => array(
+		'buddypress/groups/single/index'                => array(
 			'title'       => 'BuddyPress Groups single item Homepage',
 			'description' => __( 'Used to display a group’s homepage.', 'buddypress' ),
+		),
+		'buddypress/groups/single/plugins'                => array(
+			'title'       => 'BuddyPress Groups single item plugin page',
+			'description' => __( 'Used to display a group’s plugin page.', 'buddypress' ),
 		),
 		'buddypress/members/index'                     => array(
 			'title'       => 'BuddyPress Members Directory page',
@@ -485,7 +489,7 @@ function bp_get_default_block_templates() {
 			'title'       => 'BuddyPress registration page',
 			'description' => __( 'Used to display the form to let new members register to the site.', 'buddypress' ),
 		),
-		'buddypress/members/single/home'               => array(
+		'buddypress/members/single/index'               => array(
 			'title'       => 'BuddyPress Members single item Homepage',
 			'description' => __( 'Used to display a member’s personnal homepage.', 'buddypress' ),
 		),
