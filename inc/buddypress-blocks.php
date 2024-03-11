@@ -501,6 +501,30 @@ function bp_get_default_block_templates() {
 }
 
 /**
+ * Adds a specific template part area for BuddyPress areas.
+ *
+ * @since 1.0.0
+ *
+ * @param array $areas The default WordPress template part areas.
+ * @return array All template part areas.
+ */
+function bp_get_template_part_areas( $areas = array() ) {
+	$areas[] = array(
+		'area'        => 'buddypress',
+		'label'       => _x( 'BuddyPress', 'template part area', 'buddyvibes' ),
+		'description' => __(
+			'The BuddyPress part’s area is used by BuddyPress for specific community template parts.',
+			'buddyvives'
+		),
+		'icon'        => 'layout',
+		'area_tag'    => 'div',
+	);
+
+	return $areas;
+}
+add_filter( 'default_wp_template_part_areas', 'bp_get_template_part_areas' );
+
+/**
  * Adds a title and a description to BP Block Templates found into the theme by the site editor.
  *
  * This function should be moved in `buddypress/src/bp-core/bp-core-template.php`.

@@ -250,6 +250,11 @@
 			"area": "footer",
 			"name": "footer",
 			"title": "Footer"
+		},
+		{
+			"area": "buddypress",
+			"name": "buddypress/member-entry",
+			"title": "Member’s entry"
 		}
 	]
 }
