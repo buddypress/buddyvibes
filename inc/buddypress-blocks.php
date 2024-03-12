@@ -311,11 +311,33 @@ function bp_block_render_item_avatar( $attributes, $content, $block ) {
 function bp_block_render_loop( $attributes, $content, $block ) {
 	$loop_content = '';
 	$classnames   = 'buddypress bp-loop';
+	$object       = 'members';
 
-	if ( 'members' === $attributes['object'] ) {
+	if ( isset( $attributes['object'] ) ) {
+		$object = $attributes['object'];
+		unset( $attributes['object'] );
+	}
+
+	$property_mappings = array(
+		'members' => array(
+			'type'    => 'type',
+			'perPage' => 'per_page',
+		),
+	);
+
+	$args = array();
+	foreach ( $attributes as $attr_key => $attr_value ) {
+		if ( ! isset( $property_mappings['members'][ $attr_key ] ) ) {
+			continue;
+		}
+
+		$args[ $property_mappings['members'][ $attr_key ] ] = $attr_value;
+	}
+
+	if ( 'members' === $object ) {
 		$classnames .= ' bp-members-list';
 
-		if ( bp_has_members() ) {
+		if ( bp_has_members( $args ) ) {
 			while ( bp_members() ) {
 				bp_the_member();
 

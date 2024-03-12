@@ -11,6 +11,14 @@
 		"object": {
 			"type": "string",
 			"default": "members"
+		},
+		"type": {
+			"type": "string",
+			"default": "active"
+		},
+		"perPage": {
+			"type": "integer",
+			"default" : 20
 		}
 	},
 	"supports": {
