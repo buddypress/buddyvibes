@@ -29,19 +29,23 @@ function buddyvibes_get_theme_blocks() {
 	$blocks_dir = dirname( dirname( __FILE__ ) ) . '/assets/blocks';
 
 	return array(
-		'bp/item-header' => array(
+		'bp/item-header'     => array(
 			'metadata'        => $blocks_dir . '/item-header',
 			'render_callback' => 'bp_block_render_item_header',
 		),
-		'bp/item-body' => array(
+		'bp/item-body'       => array(
 			'metadata'        => $blocks_dir . '/item-body',
 			'render_callback' => 'bp_block_render_item_body',
 		),
-		'bp/item-avatar' => array(
+		'bp/item-avatar'     => array(
 			'metadata'        => $blocks_dir . '/item-avatar',
 			'render_callback' => 'bp_block_render_item_avatar',
 		),
-		'bp/loop' => array(
+		'bp/item-name'       => array(
+			'metadata'        => $blocks_dir . '/item-name',
+			'render_callback' => 'bp_block_render_item_name',
+		),
+		'bp/loop'            => array(
 			'metadata'        => $blocks_dir . '/loop',
 			'render_callback' => 'bp_block_render_loop',
 		),
@@ -294,6 +298,68 @@ function bp_block_render_item_avatar( $attributes, $content, $block ) {
 	}
 
 	return $avatar;
+}
+
+/**
+ * Callback function to render a BP item name.
+ *
+ * This function should be moved in `buddypress/src/bp-core/bp-core-blocks.php`.
+ *
+ * @since 1.0.0
+ *
+ * @todo Group, Blog & other loop contexts.
+ *
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block default content.
+ * @param WP_Block $block      Block instance.
+ * @return string HTML output.
+ */
+function bp_block_render_item_name( $attributes, $content, $block ) {
+	$name = '';
+
+	if ( ! isset( $block->context['itemId'] ) || ! isset( $block->context['itemType'] ) ) {
+		return $name;
+	}
+
+	$is_link = false;
+	if ( isset( $attributes['isLink'] ) ) {
+		$is_link = (bool) $attributes['isLink'];
+	}
+
+	if ( 'members' === $block->context['itemType'] ) {
+		// Use the BuddyPress loop global if it's available.
+		if ( isset( $GLOBALS['members_template']->member ) ) {
+			$name = bp_get_member_name();
+
+			if ( $is_link ) {
+				$name = sprintf(
+					'<a href="%1$s">%2$s</a>',
+					esc_url( bp_get_member_permalink() ),
+					$name
+				);
+			}
+
+			// Use Block context.
+		} else {
+
+			/** This filter is documented in bp-members/bp-members-template.php */
+			$name = apply_filters(
+				'bp_get_member_namer',
+				bp_core_get_user_displayname( $block->context['itemId'] )
+			);
+
+			if ( $is_link ) {
+				$permalink = bp_members_get_user_url( $block->context['itemId'] );
+				$name = sprintf(
+					'<a href="%1$s">%2$s</a>',
+					esc_url( $permalink ),
+					$name
+				);
+			}
+		}
+	}
+
+	return $name;
 }
 
 /**

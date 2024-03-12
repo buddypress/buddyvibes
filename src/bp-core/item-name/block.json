@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "bp/item-name",
+	"title": "BuddyPress item name",
+	"category": "theme",
+	"icon": "nametag",
+	"description": "Displays the name of a BuddyPress item.",
+	"textdomain": "buddypress",
+	"usesContext": [ "itemId", "itemType" ],
+	"attributes": {
+		"isLink": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"supports": {
+		"align": [ "left", "right", "center" ],
+		"html": false,
+		"reusable": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:index.js"
+}
