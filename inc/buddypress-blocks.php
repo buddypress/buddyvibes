@@ -491,6 +491,11 @@ function bp_block_render_item_navigation( $attributes ) {
 		foreach ( $item_navs as $item_nav ) {
 			$current = '';
 
+			// Do not create items that should not be displayed to the current user.
+			if ( ( isset( $item_nav['show_for_displayed_user'] ) && false === $item_nav['show_for_displayed_user'] ) || ( isset( $item_nav['user_has_access'] ) && false === $item_nav['user_has_access'] ) ) {
+				continue;
+			}
+
 			// Set current item nav.
 			if ( ( 'primary' === $type && bp_is_current_component( $item_nav['slug'] ) ) || ( 'secondary' === $type && bp_is_current_action( $item_nav['slug'] ) ) ) {
 				$current = 'current-menu-item';
