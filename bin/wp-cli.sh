@@ -35,7 +35,7 @@ community=$(wp post create ./assets/starter-content/community.html --post_type=p
 # Use the landing page as site's home page and the blog one for posts.
 wp option update show_on_front page --path="$wp_path"
 wp option update page_on_front $landing --path="$wp_path"
-wp option update page_for_posts $community --path="$wp_path"
+wp option update page_for_posts $blog --path="$wp_path"
 
 # Set the custom logo.
 logo=$(wp media import ./assets/images/site-logo.png --porcelain --path="$wp_path")
